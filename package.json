@@ -4,7 +4,9 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "genSchema": "npx prisma generate",
+    "pushSchema": "npx prisma db push"
   },
   "dependencies": {
     "@prisma/client": "^4.7.1",
