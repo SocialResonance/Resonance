@@ -83,3 +83,5 @@ About
 
 .next/*
 .next
+.next/
+.next/build-manifest.json
