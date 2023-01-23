@@ -81,3 +81,5 @@ About
 *.pack
 
 
+.next/*
+.next/
