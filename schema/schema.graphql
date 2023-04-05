@@ -1,0 +1,38 @@
+type Space {
+  id: ID!
+  name: String!
+  description: String
+  location: Location!
+  category: Category!
+  recurringTime: String!
+  members: [User!] @hasInverse(field: spaces)
+}
+
+type Location {
+  id: ID!
+  street: String!
+  city: String!
+  zipCode: String!
+  latitude: Float!
+  longitude: Float!
+  spaces: [Space!] @hasInverse(field: location)
+}
+
+type Category {
+  id: ID!
+  name: String! @unique
+  spaces: [Space!] @hasInverse(field: category)
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String! @unique
+  spaces: [Space!] @hasInverse(field: members)
+  role: UserRole
+}
+
+enum UserRole {
+  MEMBER
+  ADMIN
+}
