@@ -1,38 +1,40 @@
+# schema.dql
+name: string @index(exact) .
+email: string @index(exact) .
+street: string .
+city: string .
+zipCode: string .
+latitude: float .
+longitude: float .
+recurringTime: string .
+description: string .
+
 type Space {
-  id: ID!
-  name: String!
-  description: String
-  location: Location!
-  category: Category!
-  recurringTime: String!
-  members: [User!] @hasInverse(field: spaces)
+  name
+  description
+  location: uid
+  category: uid
+  recurringTime
+  members: [uid]
 }
 
 type Location {
-  id: ID!
-  street: String!
-  city: String!
-  zipCode: String!
-  latitude: Float!
-  longitude: Float!
-  spaces: [Space!] @hasInverse(field: location)
+  street
+  city
+  zipCode
+  latitude
+  longitude
+  spaces: [uid]
 }
 
 type Category {
-  id: ID!
-  name: String! @unique
-  spaces: [Space!] @hasInverse(field: category)
+  name
+  spaces: [uid]
 }
 
 type User {
-  id: ID!
-  name: String!
-  email: String! @unique
-  spaces: [Space!] @hasInverse(field: members)
-  role: UserRole
-}
-
-enum UserRole {
-  MEMBER
-  ADMIN
+  name
+  email
+  spaces: [uid]
+  role: string
 }
