@@ -18,7 +18,7 @@ const Register: NextPage = () => {
       const response = await axios.post(
         'http://localhost:3000/api/register',
         {
-          username: name,
+          name,
           email,
           password,
         }
