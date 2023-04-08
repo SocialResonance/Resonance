@@ -1,6 +1,5 @@
-import { DgraphClient, Mutation, clientStubFromCloudEndpoint } from "dgraph-js";
+import { DgraphClient, Mutation, clientStubFromCloudEndpoint, Txn } from "dgraph-js";
 import { hash } from "bcryptjs"; // for hashing the password
-import { v4 as uuidv4 } from "uuid"; // for generating a unique ID
 
 export default async function register(req, res) {
   const { name, email, password } = req.body;
@@ -11,51 +10,57 @@ export default async function register(req, res) {
   console.log("apiKey", apiKey);
   const clientStub = clientStubFromCloudEndpoint(dbURl, apiKey);
   const dgraphClient = new DgraphClient(clientStub);
+  const txn = dgraphClient.newTxn();
 
   try {
     // Check if user already exists
-    const query = `query {
-      user(func: eq(email, "${email}")) {
-        uid
+    const { name, email, password } = req.body;
+    console.log("name", name);
+    console.log("email", email);
+
+    const query = `{
+      user(func: has(name)) @filter(eq(email, "${email}")) {
+        name
+        email
       }
     }`;
-    const txn = dgraphClient.newTxn();
-    const response = await txn.query(query);
-    const data = response.getJson();
-    txn.discard();
-
-    if (data.user.length > 0) {
-      // User already exists, return an error
-      res.status(409).json({ error: "User already exists" });
+    const dgraphResponse = await dgraphClient.newTxn().query(query);
+    console.log("res", dgraphResponse.getJson());
+    const allUsers = dgraphResponse.getJson().user;
+    if (allUsers.length > 0) {
+      console.log("User already exists");
+      res.status(400).json({ message: "User already exists" });
       return;
     }
+    else {
+      // Hash the password
+      const hashedPassword = await hash(password, 12);
+      // Create a new user
+      const user = {
+        name,
+        email,
+        password: hashedPassword,
+        spaces: [],
+      };
+      // Create a new mutation
+      const mu = new Mutation();
+      mu.setSetJson(user);
+      // Commit the mutation
+      const response = await txn.mutate(mu);
+      console.log("response", response);
+      // Commit the transaction
+      await txn.commit();
+      res.status(200).json({ message: "User created successfully" });
+    }
 
-    // User doesn't exist, register the user
-    const hashedPassword = await hash(password, 10);
-    const uid = uuidv4();
-    const mutation = `
-    mutation {
-      set {
-        _:user <id> "${uid}" .
-        _:user <name> "${name}" .
-        _:user <email> "${email}" .
-        _:user <password> "${hashedPassword}" .
-      }
-    }`;
-  
-
-  
-    const mu = new Mutation();
-    mu.setSetNquads(new TextEncoder().encode(mutation));
-  
-    const txn2 = dgraphClient.newTxn();
-    await txn2.mutate(mu);
-    await txn2.commit();
-    txn2.discard();
-
-    res.status(200).json({ message: "User registered successfully" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Server error" });
   }
+  catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+  finally {
+    await txn.discard();
+    // ...
+  }
+
 }
