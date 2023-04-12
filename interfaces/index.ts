@@ -4,8 +4,12 @@
 //
 // import { User } from 'path/to/interfaces';
 
-export type User = {
-  id: number
-  name: string
-}
+export type DbError = "Username already exists"| "Email already exists"| "User not found"| "Incorrect password"| "Unknown error"
 
+export type User = {
+  uid: string;
+  name: string;
+  email: string;
+  password: string;
+  spaces: string[];
+}

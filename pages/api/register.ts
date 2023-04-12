@@ -1,5 +1,6 @@
 import { DgraphClient, Mutation, clientStubFromCloudEndpoint, Txn } from "dgraph-js";
 import { hash } from "bcryptjs"; // for hashing the password
+import { DbError, User } from "../../interfaces";
 
 export default async function register(req, res) {
   const { name, email, password } = req.body;
@@ -12,31 +13,48 @@ export default async function register(req, res) {
   const dgraphClient = new DgraphClient(clientStub);
   const txn = dgraphClient.newTxn();
 
+  let error:DbError = "Unknown error";
+
   try {
     // Check if user already exists
     const { name, email, password } = req.body;
     console.log("name", name);
     console.log("email", email);
 
-    const query = `{
+    const queryEmail = `{
       user(func: has(name)) @filter(eq(email, "${email}")) {
         name
         email
       }
     }`;
-    const dgraphResponse = await dgraphClient.newTxn().query(query);
-    console.log("res", dgraphResponse.getJson());
-    const allUsers = dgraphResponse.getJson().user;
-    if (allUsers.length > 0) {
-      console.log("User already exists");
-      res.status(400).json({ message: "User already exists" });
+    const queryName = `{
+      user(func: has(name)) @filter(eq(name, "${name}")) {
+        name
+        email
+      }
+    }`;
+    const dgraphResponseEmail = await dgraphClient.newTxn().query(queryEmail);
+    const dgraphResponseName = await dgraphClient.newTxn().query(queryName);
+    const allUsersWithSameEmail = dgraphResponseEmail.getJson().user;
+    if (allUsersWithSameEmail.length > 0) {
+      console.log("Email already exists");
+      error = "Email already exists";
+      res.status(400).json({ error });
+      return;
+    }
+    const allUsersWithSameName = dgraphResponseName.getJson().user;
+    if (allUsersWithSameName.length > 0) {
+      console.log("Username already exists");
+      error = "Username already exists";
+      res.status(400).json({ error });
       return;
     }
     else {
       // Hash the password
       const hashedPassword = await hash(password, 12);
       // Create a new user
-      const user = {
+      const user: User = {
+        uid: "_:newUser",
         name,
         email,
         password: hashedPassword,
@@ -56,7 +74,7 @@ export default async function register(req, res) {
   }
   catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Something went wrong" });
+    res.status(500).json({ error });
   }
   finally {
     await txn.discard();
