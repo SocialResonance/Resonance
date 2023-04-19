@@ -23,8 +23,9 @@ const Register: NextPage = () => {
 
       console.log(response.data)
       router.push('/login')
-    } catch (error) {
-      setError(error.response.data.message)
+    } catch (e) {
+      setError(e.response.data.message)
+      console.log(error)
     }
   }
 
