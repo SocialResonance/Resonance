@@ -8,7 +8,7 @@ const handler = (_req: NextApiRequest, res: NextApiResponse) => {
     }
 
     res.status(200).json(sampleUserData)
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     res.status(500).json({ statusCode: 500, message: err.message })
   }

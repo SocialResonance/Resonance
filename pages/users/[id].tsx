@@ -55,7 +55,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     // By returning { props: item }, the StaticPropsDetail component
     // will receive `item` as a prop at build time
     return { props: { item } }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     return { props: { errors: err.message } }
   }
