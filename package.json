@@ -9,12 +9,12 @@
     "pushSchema": "npx prisma db push"
   },
   "dependencies": {
-    "@prisma/client": "^4.7.1",
+    "@prisma/client": "latest",
     "axios": "^1.2.1",
     "bcrypt": "^5.1.0",
     "next": "12.2.5",
     "ol": "^7.2.1",
-    "prisma": "^4.7.1",
+    "prisma": "latest",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -25,6 +25,6 @@
     "autoprefixer": "^10.4.7",
     "postcss": "^8.4.14",
     "tailwindcss": "^3.1.6",
-    "typescript": "4.0"
+    "typescript": "latest"
   }
 }
