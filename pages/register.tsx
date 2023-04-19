@@ -1,35 +1,32 @@
-import { useState } from 'react';
-import { NextPage } from 'next';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import axios from 'axios';
+import { useState } from 'react'
+import { NextPage } from 'next'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import axios from 'axios'
 
 const Register: NextPage = () => {
-  const router = useRouter();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const router = useRouter()
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
-      const response = await axios.post(
-        'http://localhost:3000/api/register',
-        {
-          username: name,
-          email,
-          password,
-        }
-      );
+      const response = await axios.post('http://localhost:3000/api/register', {
+        username: name,
+        email,
+        password,
+      })
 
-      console.log(response.data);
-      router.push('/login');
+      console.log(response.data)
+      router.push('/login')
     } catch (error) {
-      setError(error.response.data.message);
+      setError(error.response.data.message)
     }
-  };
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -51,7 +48,10 @@ const Register: NextPage = () => {
         <div className="bg-white py-8 px-4 shadow-md rounded-lg">
           <form onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="name" className="block text-sm font-medium leading-5 text-gray-700">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium leading-5 text-gray-700"
+              >
                 Name
               </label>
               <div className="mt-1 rounded-md shadow-sm">
@@ -64,7 +64,10 @@ const Register: NextPage = () => {
                 />
               </div>
               <div className="mt-6">
-                <label htmlFor="email" className="block text-sm font-medium leading-5 text-gray-700">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium leading-5 text-gray-700"
+                >
                   Email address
                 </label>
                 <div className="mt-1 rounded-md shadow-sm">
@@ -79,7 +82,10 @@ const Register: NextPage = () => {
               </div>
 
               <div className="mt-6">
-                <label htmlFor="password" className="block text-sm font-medium leading-5 text-gray-700">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-5 text-gray-700"
+                >
                   Password
                 </label>
                 <div className="mt-1 rounded-md shadow-sm">
@@ -108,8 +114,7 @@ const Register: NextPage = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Register;
-
+export default Register
