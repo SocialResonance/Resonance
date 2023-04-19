@@ -6,7 +6,7 @@ import { PrismaClient, User } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const register = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     console.log("test")
     const { name, email, password } = req.body;
@@ -23,3 +23,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+
+export default register;
