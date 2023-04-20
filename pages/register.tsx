@@ -43,9 +43,9 @@ const Register: NextPage = () => {
         <p className="mt-2 text-center text-sm leading-5 text-gray-600">
           Or
           <Link href="/login">
-            <a className="font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+            <div className="font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150">
               sign in to your account
-            </a>
+            </div>
           </Link>
         </p>
       </div>

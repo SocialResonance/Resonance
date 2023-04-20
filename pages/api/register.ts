@@ -50,15 +50,12 @@ export default async function register(req, res) {
       // Hash the password
       // Create a new user
       // IMPORTANT: PASSWORD IS NOT HASHED!!!!!! YOU HAVE TO UPGRADE THE SCHEMA TO HASH THE PASSWORD
-      const currentDate = new Date()
       const user: User = {
         uid: '_:newUser',
         name,
         email,
         password,
         spaces: [],
-        createdAt: currentDate,
-        updatedAt: currentDate,
       }
       // Create a new mutation
       const mu = new Mutation()

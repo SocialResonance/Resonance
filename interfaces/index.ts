@@ -16,6 +16,4 @@ export type User = {
   email: string
   password: string
   spaces: string[]
-  createdAt: Date
-  updatedAt: Date
 }
