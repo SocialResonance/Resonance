@@ -12,8 +12,9 @@ const Register: NextPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<DbError>(null);
 
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
       console.log('sending request')
@@ -34,8 +35,9 @@ const Register: NextPage = () => {
       console.log("error");
       console.log(error);
       setError(error);
+
     }
-  };
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -57,7 +59,10 @@ const Register: NextPage = () => {
         <div className="bg-white py-8 px-4 shadow-md rounded-lg">
           <form onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="name" className="block text-sm font-medium leading-5 text-gray-700">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium leading-5 text-gray-700"
+              >
                 Name
               </label>
               <div className="mt-1 rounded-md shadow-sm">
@@ -75,7 +80,10 @@ const Register: NextPage = () => {
                 </p>
               )}
               <div className="mt-6">
-                <label htmlFor="email" className="block text-sm font-medium leading-5 text-gray-700">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium leading-5 text-gray-700"
+                >
                   Email address
                 </label>
                 <div className="mt-1 rounded-md shadow-sm">
@@ -94,7 +102,10 @@ const Register: NextPage = () => {
                 </p>
               )}
               <div className="mt-6">
-                <label htmlFor="password" className="block text-sm font-medium leading-5 text-gray-700">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-5 text-gray-700"
+                >
                   Password
                 </label>
                 <div className="mt-1 rounded-md shadow-sm">
@@ -123,8 +134,7 @@ const Register: NextPage = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Register;
-
+export default Register

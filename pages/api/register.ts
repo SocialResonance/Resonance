@@ -13,6 +13,7 @@ export default async function register(req, res) {
   const dgraphClient = new DgraphClient(clientStub);
   const txn = dgraphClient.newTxn();
 
+
   let error:DbError = "Unknown error";
 
   try {
