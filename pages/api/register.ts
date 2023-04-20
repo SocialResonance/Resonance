@@ -1,14 +1,7 @@
-import {
-  DgraphClient,
-  Mutation,
-  clientStubFromCloudEndpoint,
-  Txn,
-} from 'dgraph-js'
-import { hash } from 'bcryptjs' // for hashing the password
+import { DgraphClient, Mutation, clientStubFromCloudEndpoint } from 'dgraph-js'
 import { DbError, User } from '../../interfaces'
 
 export default async function register(req, res) {
-  const { name, email, password } = req.body
   // Connect to Dgraph client
   const dbURl = process.env.DATABASE_URL || 'http://localhost:8080'
   const apiKey = process.env.DGRAPH_CLOUD_API_KEY
@@ -55,14 +48,17 @@ export default async function register(req, res) {
       return
     } else {
       // Hash the password
-      const hashedPassword = await hash(password, 12)
       // Create a new user
+      // IMPORTANT: PASSWORD IS NOT HASHED!!!!!! YOU HAVE TO UPGRADE THE SCHEMA TO HASH THE PASSWORD
+      const currentDate = new Date()
       const user: User = {
         uid: '_:newUser',
         name,
         email,
-        password: hashedPassword,
+        password,
         spaces: [],
+        createdAt: currentDate,
+        updatedAt: currentDate,
       }
       // Create a new mutation
       const mu = new Mutation()
