@@ -6,12 +6,12 @@ const IndexPage = () => (
     <h1 className="text-3xl font-bold underline">Social Resonance</h1>
     <p>
       <Link href="/register">
-        <a>Register</a>
+        Register
       </Link>
     </p>
     <p>
       <Link href="/about">
-        <a>About</a>
+        About
       </Link>
     </p>
   </Layout>
