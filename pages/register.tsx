@@ -1,41 +1,36 @@
-import { useState } from 'react';
-import { NextPage } from 'next';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import axios from 'axios';
-import { DbError } from '../interfaces';
+import { useState } from 'react'
+import { NextPage } from 'next'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import axios from 'axios'
+import { DbError } from '../interfaces'
 
 const Register: NextPage = () => {
-  const router = useRouter();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState<DbError>(null);
-
+  const router = useRouter()
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState<DbError>(null)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     try {
       console.log('sending request')
-      const response = await axios.post(
-        'http://localhost:3000/api/register',
-        {
-          name,
-          email,
-          password,
-        }
-      );
-      console.log('response');
-      console.log(response);
-      router.push('/login');
+      const response = await axios.post('http://localhost:3000/api/register', {
+        name,
+        email,
+        password,
+      })
+      console.log('response')
+      console.log(response)
+      router.push('/login')
     } catch (errorResponse) {
-      console.log(errorResponse);
-      const error : DbError = errorResponse.response.data.error;
-      console.log("error");
-      console.log(error);
-      setError(error);
-
+      console.log(errorResponse)
+      const error: DbError = errorResponse.response.data.error
+      console.log('error')
+      console.log(error)
+      setError(error)
     }
   }
 
@@ -74,7 +69,7 @@ const Register: NextPage = () => {
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                 />
               </div>
-              {error && error === "Username already exists" && (
+              {error && error === 'Username already exists' && (
                 <p className="mt-2 text-sm text-red-600" id="email-error">
                   {error}
                 </p>
@@ -96,7 +91,7 @@ const Register: NextPage = () => {
                   />
                 </div>
               </div>
-              {error && error === "Email already exists" && (
+              {error && error === 'Email already exists' && (
                 <p className="mt-2 text-sm text-red-600" id="email-error">
                   {error}
                 </p>

@@ -3,13 +3,17 @@
 // example, to import the interface below do:
 //
 // import { User } from 'path/to/interfaces';
-export type DbError = "Username already exists"| "Email already exists"| "User not found"| "Incorrect password"| "Unknown error"
+export type DbError =
+  | 'Username already exists'
+  | 'Email already exists'
+  | 'User not found'
+  | 'Incorrect password'
+  | 'Unknown error'
 
 export type User = {
-  uid: string;
-  name: string;
-  email: string;
-  password: string;
-  spaces: string[];
-
+  uid: string
+  name: string
+  email: string
+  password: string
+  spaces: string[]
 }
