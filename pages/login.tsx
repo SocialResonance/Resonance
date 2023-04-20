@@ -26,7 +26,10 @@ const Login: NextPage = () => {
           <div className="bg-white py-8 px-4 shadow-md rounded-lg">
             <form className="space-y-6" action="#" method="POST">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium leading-5 text-gray-700">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium leading-5 text-gray-700"
+                >
                   Email address
                 </label>
                 <div className="mt-1 rounded-md shadow-sm">
@@ -39,7 +42,10 @@ const Login: NextPage = () => {
                 </div>
               </div>
               <div>
-                <label htmlFor="password" className="block text-sm font-medium leading-5 text-gray-700">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-5 text-gray-700"
+                >
                   Password
                 </label>
                 <div className="mt-1 rounded-md shadow-sm">
@@ -58,7 +64,10 @@ const Login: NextPage = () => {
                     type="checkbox"
                     className="form-checkbox h-4 w-4 text-blue-600 transition duration-150 ease-in-out"
                   />
-                  <label htmlFor="remember_me" className="ml-2 block text-sm leading-5 text-gray-900">
+                  <label
+                    htmlFor="remember_me"
+                    className="ml-2 block text-sm leading-5 text-gray-900"
+                  >
                     Remember me
                   </label>
                 </div>
@@ -74,7 +83,6 @@ const Login: NextPage = () => {
               <div>
                 <span className="block w-full rounded-md shadow-sm">
                   <button
-
                     type="submit"
                     className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out"
                   >
