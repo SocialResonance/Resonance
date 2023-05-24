@@ -17,5 +17,3 @@ export const sampleUserData: User[] = [
     spaces: [],
   },
 ]
-
-
