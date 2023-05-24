@@ -15,10 +15,10 @@ const Login: NextPage = () => {
           <p className="mt-2 text-center text-sm leading-5 text-gray-600 max-w">
             Or
             <Link href="/register">
-              <a className="font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+              <div className="font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150">
                 {' '}
                 create a new account
-              </a>
+              </div>
             </Link>
           </p>
         </div>
@@ -72,12 +72,12 @@ const Login: NextPage = () => {
                   </label>
                 </div>
                 <div className="text-sm leading-5">
-                  <a
+                  <Link
                     href="#"
                     className="font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150"
                   >
                     Forgot your password?
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div>

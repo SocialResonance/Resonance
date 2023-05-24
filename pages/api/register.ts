@@ -1,26 +1,77 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import { PrismaClient } from '@prisma/client'
+import { DgraphClient, Mutation, clientStubFromCloudEndpoint } from 'dgraph-js'
+import { DbError, User } from '../../interfaces'
 
-// Register a new user in the database and return the user object if successful or an error message if not successful
+export default async function register(req, res) {
+  // Connect to Dgraph client
+  const dbURl = process.env.DATABASE_URL || 'http://localhost:8080'
+  const apiKey = process.env.DGRAPH_CLOUD_API_KEY
+  console.log('dbURl', dbURl)
+  console.log('apiKey', apiKey)
+  const clientStub = clientStubFromCloudEndpoint(dbURl, apiKey)
+  const dgraphClient = new DgraphClient(clientStub)
+  const txn = dgraphClient.newTxn()
 
-const prisma = new PrismaClient()
+  let error: DbError = 'Unknown error'
 
-const register = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    console.log('test')
+    // Check if user already exists
     const { name, email, password } = req.body
-    const user = await prisma.user.create({
-      data: {
+    console.log('name', name)
+    console.log('email', email)
+
+    const queryEmail = `{
+      user(func: has(name)) @filter(eq(email, "${email}")) {
+        name
+        email
+      }
+    }`
+    const queryName = `{
+      user(func: has(name)) @filter(eq(name, "${name}")) {
+        name
+        email
+      }
+    }`
+    const dgraphResponseEmail = await dgraphClient.newTxn().query(queryEmail)
+    const dgraphResponseName = await dgraphClient.newTxn().query(queryName)
+    const allUsersWithSameEmail = dgraphResponseEmail.getJson().user
+    if (allUsersWithSameEmail.length > 0) {
+      console.log('Email already exists')
+      error = 'Email already exists'
+      res.status(400).json({ error })
+      return
+    }
+    const allUsersWithSameName = dgraphResponseName.getJson().user
+    if (allUsersWithSameName.length > 0) {
+      console.log('Username already exists')
+      error = 'Username already exists'
+      res.status(400).json({ error })
+      return
+    } else {
+      // Hash the password
+      // Create a new user
+      // IMPORTANT: PASSWORD IS NOT HASHED!!!!!! YOU HAVE TO UPGRADE THE SCHEMA TO HASH THE PASSWORD
+      const user: User = {
+        uid: '_:newUser',
         name,
         email,
         password,
-      },
-    })
-    res.status(200).json({ user })
-  } catch (error) {
-    console.log(error)
-    res.status(500).json({ error: error.message })
+        spaces: [],
+      }
+      // Create a new mutation
+      const mu = new Mutation()
+      mu.setSetJson(user)
+      // Commit the mutation
+      const response = await txn.mutate(mu)
+      console.log('response', response)
+      // Commit the transaction
+      await txn.commit()
+      res.status(200).json({ message: 'User created successfully' })
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ error })
+  } finally {
+    await txn.discard()
+    // ...
   }
 }
-
-export default register

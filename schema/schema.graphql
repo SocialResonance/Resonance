@@ -1,0 +1,33 @@
+type Space {
+  id: ID!
+  name: String!
+  description: String!
+  category: String!
+  location: String!
+  recurringTime: String!
+  members: [User] @hasInverse(field: spaces)
+  newsletters: [Newsletter]
+  membershipFees: [MembershipFee]
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String! @id
+  password: String!
+  spaces: [Space] @hasInverse(field: members)
+}
+
+type Newsletter {
+  id: ID!
+  title: String!
+  content: String!
+  space: Space @hasInverse(field: newsletters)
+}
+
+type MembershipFee {
+  id: ID!
+  amount: Float!
+  date: String!
+  space: Space @hasInverse(field: membershipFees)
+}

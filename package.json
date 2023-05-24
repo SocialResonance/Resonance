@@ -3,29 +3,29 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
+    "update-schema": "tsx ./scripts/updateSchema.ts",
     "start": "next start",
     "type-check": "tsc",
     "lint": "next lint --max-warnings 0",
     "format:check": "prettier --list-different '**/*.{js,jsx,ts,tsx,css,md,json}'",
     "format": "prettier --write .",
     "test": "jest",
-    "test:coverage": "jest --coverage",
-    "genSchema": "npx prisma generate",
-    "pushSchema": "npx prisma db push"
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
-    "@prisma/client": "latest",
     "axios": "^1.2.1",
-    "bcrypt": "^5.1.0",
+    "dgraph-js": "^21.3.1",
+    "dgraph-js-http": "^21.3.1",
+    "dotenv": "^16.0.3",
     "next": "13.3.0",
     "ol": "^7.2.1",
-    "prisma": "latest",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
+    "@types/jest": "^29.5.1",
     "@types/node": "^12.12.21",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
@@ -43,6 +43,7 @@
     "postcss": "^8.4.14",
     "prettier": "^2.8.7",
     "tailwindcss": "^3.1.6",
+    "tsx": "^3.12.6",
     "typescript": "latest"
   }
 }
