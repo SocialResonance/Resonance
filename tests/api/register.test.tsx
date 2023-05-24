@@ -57,7 +57,7 @@ describe('register', () => {
 
     txn.mutate = jest.fn().mockResolvedValueOnce({})
 
-    // THIS TEST DOESNT DO ANYTHING. INSTEAD WRITE END TO END TESTS WITH CYPRESS. 
+    // THIS TEST DOESNT DO ANYTHING. INSTEAD WRITE END TO END TESTS WITH CYPRESS.
 
     expect(1).toBe(1)
   })
