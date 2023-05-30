@@ -4,6 +4,7 @@
     "dev": "next",
     "build": "next build",
     "update-schema": "tsx ./scripts/updateSchema.ts",
+    "parseSchema": "tsx ./scripts/dql-to-zod.ts",
     "start": "next start",
     "type-check": "tsc",
     "lint": "next lint --max-warnings 0",
@@ -17,10 +18,12 @@
     "dgraph-js": "^21.3.1",
     "dgraph-js-http": "^21.3.1",
     "dotenv": "^16.0.3",
+    "dql-to-zod": "latest",
     "next": "13.3.0",
     "ol": "^7.2.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
