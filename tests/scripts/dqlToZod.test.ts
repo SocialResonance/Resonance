@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import dqlToZod from 'dql-to-zod'
 import fs from 'fs'
+import path from 'path'
 import {
   MembershipFee as importedMembershipFee,
   Newsletter as importedNewsletter,
@@ -13,23 +14,31 @@ import { generateMock } from '@anatine/zod-mock'
 //should write zod Schemas and types to the file system in the specified path and delete the file after the test
 
 describe('dqlToZod', () => {
+  const tempPath = 'tests/temp'
+  const filePath = path.join(tempPath, 'zodSchemasAndTypesTest.ts')
+
+  beforeAll(() => {
+    if (!fs.existsSync(tempPath)) {
+      fs.mkdirSync(tempPath, { recursive: true })
+    }
+  })
+
   afterAll(() => {
-    fs.unlinkSync('tests/temp/zodSchemasAndTypesTest.ts')
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath)
+    }
   })
 
   it('should write zod Schemas and types to the file system in the specified path', () => {
-    dqlToZod(schema, 'tests/temp/zodSchemasAndTypesTest.ts')
-
-    expect(fs.existsSync('tests/temp/zodSchemasAndTypesTest.ts')).toBe(true)
+    dqlToZod(schema, filePath)
+    expect(fs.existsSync(filePath)).toBe(true)
   })
 
   it('should have generated correct zod Schemas', () => {
-    const {
-      MembershipFee,
-      Newsletter,
-      Space,
-      User,
-    } = require('../temp/zodSchemasAndTypesTest.ts')
+    const { MembershipFee, Newsletter, Space, User } = require(path.relative(
+      __dirname,
+      filePath
+    ))
 
     const mockMembershipFeeData = generateMock(importedMembershipFee)
     const mockNewsletterData = generateMock(importedNewsletter)
