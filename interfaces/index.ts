@@ -9,11 +9,3 @@ export type DbError =
   | 'User not found'
   | 'Incorrect password'
   | 'Unknown error'
-
-export type User = {
-  uid: string
-  name: string
-  email: string
-  password: string
-  spaces: string[]
-}
