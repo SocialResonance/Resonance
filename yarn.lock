@@ -1682,9 +1682,9 @@ camelcase@^6.2.0:
   integrity sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==
 
 caniuse-lite@^1.0.30001406, caniuse-lite@^1.0.30001464, caniuse-lite@^1.0.30001489:
-  version "1.0.30001491"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001491.tgz#eab0e0f392de6f7411751d148de9b5bd6b203e46"
-  integrity sha512-17EYIi4TLnPiTzVKMveIxU5ETlxbSO3B6iPvMbprqnKh4qJsQGk5Nh1Lp4jIMAE0XfrujsJuWZAM3oJdMHaKBA==
+  version "1.0.30001492"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001492.tgz#4a06861788a52b4c81fd3344573b68cc87fe062b"
+  integrity sha512-2efF8SAZwgAX1FJr87KWhvuJxnGJKOnctQa8xLOskAXNXq8oiuqgl6u1kk3fFpsp3GgvzlRjiK1sl63hNtFADw==
 
 chalk@^2.0.0:
   version "2.4.2"
@@ -2043,14 +2043,14 @@ domexception@^4.0.0:
     webidl-conversions "^7.0.0"
 
 dotenv@^16.0.3:
-  version "16.1.0"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.1.0.tgz#beb4232166ea080520a42245b8007227ad84b052"
-  integrity sha512-XiwP/4cqatBNLEnKe169vPZCrovUmYngyVA4DgZ3uIVLJfZaBgr4uT0EF2TrEQqgWDDlekGo0muEYme5SR78Ww==
+  version "16.1.1"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.1.1.tgz#9105a6c486ab66076231fbe7cf4ba77131a61d65"
+  integrity sha512-UGmzIqXU/4b6Vb3R1Vrfd/4vGgVlB+mO+vEixOdfRhLeppkyW2BMhuK7TL8d0el+q9c4lW9qK2wZYhNLFhXYLA==
 
-dql-to-zod@latest:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/dql-to-zod/-/dql-to-zod-0.0.5.tgz#1a9599830033cc8b19702044659849f8063eb912"
-  integrity sha512-q/s1755ihmzxSbhPamiSXkxYLit64dY2LcgwfPbSGDLh1/jWV8cDLDXo2WbLMH5UPWQ508QllZP0lj1CbkZXPg==
+dql-to-zod@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/dql-to-zod/-/dql-to-zod-0.0.6.tgz#78c29c12ab3617c06b7543d1766a5a09468eb722"
+  integrity sha512-AQVmAjIVUWUPd2t44c36DSMxEhCeX02QS+0fuG1H2z5XzeEiS5uenrkSmuJe3Fm8B4aXO4T2DeWbB+4unWixYw==
   dependencies:
     "@types/jest" "^29.5.1"
     jest "^29.5.0"
