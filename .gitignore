@@ -84,3 +84,5 @@ About
 .next/*
 .next/
 .env
+cypress/videos
+cypress/screenshots

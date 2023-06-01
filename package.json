@@ -10,7 +10,9 @@
     "format:check": "prettier --list-different '**/*.{js,jsx,ts,tsx,css,md,json}'",
     "format": "prettier --write .",
     "test": "jest",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "dependencies": {
     "axios": "^1.2.1",
@@ -32,6 +34,7 @@
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.59.0",
     "autoprefixer": "^10.4.7",
+    "cypress": "^12.13.0",
     "eslint": "^8.38.0",
     "eslint-config-next": "13.3.0",
     "eslint-config-prettier": "^8.8.0",

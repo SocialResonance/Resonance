@@ -27,8 +27,15 @@ jobs:
       - name: Check Format
         run: yarn format:check
 
-      - name: Run tests
+      - name: Run Jest
         run: yarn test
 
       - name: Check test coverage
         run: yarn test:coverage
+
+      - name: Run Cypress
+        uses: cypress-io/github-action@v5
+        with:
+          build: yarn build
+          start: yarn dev
+          browser: chrome
