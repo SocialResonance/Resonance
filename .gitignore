@@ -79,7 +79,7 @@ Training
 Blog
 About
 *.pack
-
+build
 
 .next/*
 .next/

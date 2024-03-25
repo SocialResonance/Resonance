@@ -3,12 +3,16 @@ import Layout from '../components/Layout'
 
 const IndexPage = () => (
   <Layout title="Home | Next.js + TypeScript Example">
-    <h1 className="text-3xl font-bold underline">Social Resonance</h1>
+    <h1>Hello Next.js 👋</h1>
     <p>
-      <Link href="/register">Register</Link>
+      <Link href="/login">
+        Login
+      </Link>
     </p>
     <p>
-      <Link href="/about">About</Link>
+      <Link href="/register">
+        Register
+      </Link>
     </p>
   </Layout>
 )

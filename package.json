@@ -4,25 +4,33 @@
     "dev": "next",
     "build": "next build",
     "update-schema": "tsx ./scripts/updateSchema.ts",
+    "parseSchema": "tsx ./scripts/dql-to-zod.ts",
     "start": "next start",
     "type-check": "tsc",
     "lint": "next lint --max-warnings 0",
     "format:check": "prettier --list-different '**/*.{js,jsx,ts,tsx,css,md,json}'",
     "format": "prettier --write .",
     "test": "jest",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "genSchema": "npx prisma generate",
+    "pushSchema": "npx prisma db push",
+    "prepare": "husky install"
   },
   "dependencies": {
     "axios": "^1.2.1",
     "dgraph-js": "^21.3.1",
     "dgraph-js-http": "^21.3.1",
     "dotenv": "^16.0.3",
+    "dql-to-zod": "^0.0.6",
     "next": "13.3.0",
     "ol": "^7.2.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@anatine/zod-mock": "^3.12.0",
+    "@faker-js/faker": "^8.0.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.1",
@@ -40,6 +48,7 @@
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
     "jest-mock-extended": "^3.0.4",
+    "husky": "^8.0.3",
     "postcss": "^8.4.14",
     "prettier": "^2.8.7",
     "tailwindcss": "^3.1.6",
